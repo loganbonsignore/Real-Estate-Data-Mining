@@ -1,7 +1,7 @@
 # Mining Real Estate Information - Washington, USA
 
 ## Overview
-This web scraping program performs the Extract, Transform, Load (ETL) process of real estate metadata in Washington, USA. It collects data from multiple endpoints at kingscounty.gov, all related to a unique parcel number. This project was completed for a client sourced from [Upwork.com](https://www.upwork.com/freelancers/~0142cf8752a12b0b88?).
+This web scraping program performs the Extract, Transform, Load (ETL) process of real estate metadata in Washington, USA. It collects data from multiple endpoints at kingscounty.gov, all related to a unique parcel number. This project was completed for a real estate agency client who found me via my [Upwork profile](https://www.upwork.com/freelancers/~0142cf8752a12b0b88?).
 
 Data Collected:
 - Occupants Full Name

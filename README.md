@@ -1,4 +1,4 @@
-# Scraping Washington, USA Real Estate Information
+# Mining Washington, USA Real Estate Information
 
 ## Overview
 This web scraping program performs the Extract, Transform, Load (ETL) process of real estate metadata in Washington, USA. It collects data from multiple endpoints at kingscounty.gov, all related to a unique parcel number.

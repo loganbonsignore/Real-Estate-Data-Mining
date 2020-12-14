@@ -66,7 +66,7 @@ If the packages are installed correctly you will receive a ‘successful install
 
 ![install example](images/installing.png)
 
-## Executing the progrma
+## Executing the program
 After you have installed the necessary environmental and code dependencies you are ready to execute the code. We will use a Terminal or Bash window to complete this process. The Terminal or Bash window must be located in the directory which contains both the input file and the executable. 
 
 Input File Requirements:

@@ -24,7 +24,7 @@ Data collected by the script is saved to an excel file named “results.py” wh
 ![Output Example](images/output_example.png)
 
 ## Environment
-This program requires a python 3.7.6 or greater environment. I recommend downloading [Anaconda](https://www.anaconda.com/products/individual]. You can navigate to the Anaconda Installers page to download the package that is right for you.
+This program requires a python 3.7.6 or greater environment. I recommend downloading [Anaconda](https://www.anaconda.com/products/individual). You can navigate to the Anaconda Installers page to download the package that is right for you.
 
 ![Anaconda Download Screen](images/anaconda.png)
 

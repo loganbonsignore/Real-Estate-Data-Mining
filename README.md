@@ -6,7 +6,7 @@ This web-scraping program performs the Extract, Transform, Load (ETL) process of
 Data Collected:
 - Occupants Full Name
 - Mailing Address
-- Last Sale Price
+- Recent Sale Price
 - Lot Size
 - Appraisal Value
 - Acres

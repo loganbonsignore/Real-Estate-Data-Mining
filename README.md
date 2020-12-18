@@ -36,7 +36,7 @@ Another environmental requirement of this program is a WebDriver. This program u
 
 ![ChromeDriver Download Screen](images/chromedriver.png)
 
-Ensure you choose the correct *ChromeDriver* version based on your Chrome Browser's version number. This article will help you find your [Chrome Browser's version number](https://help.zenplanner.com/hc/en-us/articles/204253654-How-to-Find-Your-Internet-Browser-Version-Number-Google-Chrome).
+You must choose the correct *ChromeDriver* version based on your Chrome Browser's version number. This article will help you find your [Chrome Browser's version number](https://help.zenplanner.com/hc/en-us/articles/204253654-How-to-Find-Your-Internet-Browser-Version-Number-Google-Chrome).
 
 After you’ve download the *ChromeDriver* file, you must move it to it’s proper directory within your operating system. You can do this using a *Terminal* or *Bash* window or from your computer's Finder or File Explorer UI. If you choose to do this using *Terminal* or *Bash*, execute this command from a window located in your downloads directory.
 

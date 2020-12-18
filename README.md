@@ -32,11 +32,9 @@ We will be executing our code in the **Shell**. Use the *Terminal* if you are on
 
 If you are on a Mac, the *Terminal* is already installed and ready to use. If you are on a Windows, you may need to enable *Bash* before it is ready for use. This article will help you [enable *Bash*](https://www.laptopmag.com/articles/use-bash-shell-windows-10) if you are exeriencing issues.
 
-Another environmental requirement of this program is a WebDriver. This program uses *ChromeDriver* which is compatible with the Chrome Browser (Mac, Linux, Windows and ChromeOS). You can download a *ChromeDriver* file [here](https://chromedriver.chromium.org/downloads). 
+Another environmental requirement of this program is a WebDriver. This program uses *ChromeDriver* which is compatible with the Chrome Browser (Mac, Linux, Windows and ChromeOS). You can download a *ChromeDriver* file [here](https://chromedriver.chromium.org/downloads). You must choose the correct *ChromeDriver* version based on your Chrome Browser's version number. This article will help you find your [Chrome Browser's version number](https://help.zenplanner.com/hc/en-us/articles/204253654-How-to-Find-Your-Internet-Browser-Version-Number-Google-Chrome).
 
 ![ChromeDriver Download Screen](images/chromedriver.png)
-
-You must choose the correct *ChromeDriver* version based on your Chrome Browser's version number. This article will help you find your [Chrome Browser's version number](https://help.zenplanner.com/hc/en-us/articles/204253654-How-to-Find-Your-Internet-Browser-Version-Number-Google-Chrome).
 
 After you’ve download the *ChromeDriver* file, you must move it to it’s proper directory within your operating system. You can do this using a *Terminal* or *Bash* window or from your computer's Finder or File Explorer UI. If you choose to do this using *Terminal* or *Bash*, execute this command from a window located in your downloads directory.
 

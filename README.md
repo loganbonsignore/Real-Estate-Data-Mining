@@ -1,4 +1,4 @@
-# Mining Real Estate Information - Washington, USA
+# Mining Real Estate Data - Washington, USA
 
 ## Overview
 This web scraping program performs the Extract, Transform, Load (ETL) process of real estate metadata in Washington, USA. It collects data from multiple endpoints at kingscounty.gov, all related to a unique parcel number.
@@ -6,6 +6,7 @@ This web scraping program performs the Extract, Transform, Load (ETL) process of
 Data Collected:
 - Occupants Full Name
 - Mailing Address
+- Last Sale Price
 - Lot Size
 - Appraisal Value
 - Acres
@@ -18,7 +19,7 @@ Data Collected:
 - Latitude/Longitude
 - & more
 
-All collected information is saved to an excel file named “results.py”. It downloads to the same directory that “executable.py” is executed from.
+All collected information is saved to an excel file named “results.py” which downloads to the same directory that “executable.py” is executed from.
 
 ![Output Example](images/output_example.png)
 

@@ -17,6 +17,7 @@ def initialize_chromebrowser(headless: bool):
 
 # Creating master dataframe (output file) layout 
 output_file = pd.DataFrame({
+    "Name": ["Name"],
     "Full Name": ["full_name"],
     "First Name": ["First Name"],
     "Last Name": ['Last Name'],
@@ -44,13 +45,16 @@ output_file = pd.DataFrame({
     "Latitude": ["lat"],
     "Longitude": ["long"],
     "Urban Growth Area": ["urban_growth_area"],
-    "Address": ["address"],
+    "Address_1": ["address"],
+    "Address_2": ["address_2"],
     "City": ["city"],
     "State": ["state"],
     "Zip": ["zipcode"],
     "Total Billed": ["total_billed"],
-    "Balance": ["balance"]
-})
+    "Balance": ["balance"],
+    "Document Date": ["document_date"],
+    "Sales Price": ["sales_price"],
+    "Parcel ID": ["parcel_id"]})
 
 # Reading in Parcel Ids
 df = pd.read_excel("parcels.xlsx") ######## Input path of excel file that contains parcel id's
@@ -71,11 +75,10 @@ for parcel_id in parcel_ids:
         dataframes = pd.read_html(browser.html)
         data = dataframes[1]
         # Extract data from website 1
-    
         for index, row in data.iterrows():
             # Retrieving NAME, LEGAL, LOT SIZE, VIEWS, APPRAISAL INFORMATION
             if row[0] == "Name":
-                full_name = row[1]   
+                name = row[1]   
             if row[0] == "Legal":
                 legal = row[1]
             if row[0] == "Lot Size":
@@ -87,18 +90,28 @@ for parcel_id in parcel_ids:
                 appraised_land_value = data.loc[next_index, 2]
                 appraised_imps_value = data.loc[next_index, 3]
                 appraised_total = data.loc[next_index, 4]
-        # Separating first and last names
-        split_full_name = full_name.split(" ")
-        if len(split_full_name) >= 2:
+        # Separating FIRST NAME and LAST NAME
+        split_full_name = name.split(" ")
+        if len(split_full_name) == 2:
             last_name = split_full_name[0]
-            first_name = " ".join(split_full_name[1:])
-        elif len(split_full_name) == 1:
+            first_name = split_full_name[1]
+        elif len(split_full_name) >= 3:
             last_name = split_full_name[0]
-            first_name = "OCCUPANT"
+            first_name_list = split_full_name[1:3]
+            if len(first_name_list[1]) == 1:
+                first_name = " ".join(first_name_list)
+            else:
+                first_name = first_name_list[0]
         else:
-            last_name = "OCCUPANT"
+            last_name = split_first_name[0]
             first_name = "OCCUPANT"
+        # FULL NAME
+        if ("LLC" in name) or ("llc" in name):
+            full_name = name
+        else:
+            full_name = f"{first_name} {last_name}"
     except:
+        name = ""
         full_name = ""
         legal = ""
         lot_size = ""
@@ -154,6 +167,16 @@ for parcel_id in parcel_ids:
         power_lines = ""
         water_problems = ""
         environmental = ""
+        
+    # DOCUMENT DATE, SALES PRICE
+    soup = bs(browser.html, "html.parser")
+    try:
+        items = soup.find("table", {"id":"cphContent_GridViewSales"}).find_all("td")
+        document_date = items[2].text.strip()
+        sales_price = items[3].text.strip()
+    except:
+        document_date = ""
+        sales_price = ""
             
     # Navigate to website 3
     browser.visit(f"https://www5.kingcounty.gov/kcgisreports/dd_report.aspx?PIN={parcel_id}")
@@ -164,11 +187,11 @@ for parcel_id in parcel_ids:
         # Extracting ADDRESS, JURISDICTION, ZIPCODE, LATITUDE, LONGITUDE, URBAN GROWTH AREA
         for index, row in dataframes[1].iterrows():
             if row[0] == "Address":
-                address_1 = row[1] 
+                paddress = row[1] 
             if row[0] == "Jurisdiction":
                 jurisdiction = row[1] 
             if row[0] == "Zipcode":
-                zipcode_1 = row[1] 
+                pzip = row[1] 
             if row[0] == "Latitude":
                 lat = row[1] 
             if row[0] == "Longitude":
@@ -176,9 +199,9 @@ for parcel_id in parcel_ids:
             if row[0] == "Urban Growth Area":
                 urban_growth_area = row[1]
     except:
-        address = ""
+        paddress = ""
         jurisdiction = ""
-        zipcode = ""
+        pzip = ""
         lat = ""
         long = ""
         urban_growth_area = ""
@@ -193,17 +216,22 @@ for parcel_id in parcel_ids:
         except:
             time.sleep(3)
             dataframes = pd.read_html(browser.html)
-        # Extracting TOTAL BILLED, BALANCE
-        for index, row in dataframes[0].iterrows():
-            if row["Tax Information"] == "Total billed":
-                total_billed = row["2020"]
-            if row["Tax Information"] == "Balance":
-                balance = row["2020"]
+        # Get Tax Information
+        for i in range(len(dataframes)):
+            if "Balance" in list(dataframes[i].iloc[:,0]):
+                for index, row in dataframes[i].iterrows():
+                    if row["Tax Information"] == "Balance":
+                        balance = row["2020"]
+            if ("Total billed" in list(dataframes[i].iloc[:,0])) or ("Total Billed" in list(dataframes[i].iloc[:,0])):
+                for index, row in dataframes[i].iterrows():
+                    if (row["Tax Information"] == "Total billed") or (row["Tax Information"] == "Total Billed"):
+                        total_billed = row["2020"]
     except:
         total_billed = ""
         balance = ""
+        
     try:
-        # Exracting ADDRESS, CITY, STATE, ZIPCODE
+        # Extracting ADDRESS, CITY, STATE, ZIPCODE
         soup = bs(browser.html, "html.parser")
         items = soup.find("div",{"id":"parcelPanels"})
         narrowed = items.find_all("p")
@@ -211,33 +239,46 @@ for parcel_id in parcel_ids:
             address_information = narrowed[2]
         elif len(narrowed) == 9:
             address_information = narrowed[4]
+
+        master_list = []
         address_list = []
-        city_list = []
         address_element_list = address_information.text.strip().split(" ")
         # ZIPCODE
-        zipcode_2 = address_element_list[-1]
-        # ADDRESS
-        for element in address_element_list:
-            address_list.append(element)
-            if "" in address_list:
-                break
-        index = len(address_list)
+        zipcode = address_element_list[-1]
+        # Finding address pieces
+        for i in address_element_list:
+            master_list.append(i)
+            num_blanks = len([j for j in master_list if j == ""])
+            if num_blanks == 2:
+                address_piece = " ".join(master_list).strip()
+                address_list.append(address_piece)
+                master_list = []
+        # Eliminating all blank elements in list
+        while "" in address_list:
+            _index = 0
+            for _ in address_list:
+                if _ == "":
+                    address_list.pop(_index)
+                _index+=1
+        # ADDRESS_1 ADDRESS_2
+        if len(address_list) == 3:
+            address_1 = address_list[1]
+            address_2 = address_list[0]
+        elif len(address_list) == 2:
+            address_1 = address_list[0]
+            address_2 = ""
         # CITY
-        for element in address_element_list[index:]:
-            city_list.append(element)
-            if "WA" in city_list:
-                break
-        address_2 = " ".join(address_list).strip()
-        city_list.pop(-1)
-        city_2 = " ".join(city_list).strip()
+        city_word_list = address_list[-1].split(" ")[:-1]
+        city = " ".join(city_word_list)
     except:
+        address_1 = ""
         address_2 = ""
-        city_2 = ""
-        zipcode_2 = ""
+        city = ""
+        zipcode = ""
 
     # Creating new row of data
     new_row = pd.DataFrame({
-        "Parcel ID": parcel_id,
+        "Name": name,
         "Full Name": full_name,
         "First Name": first_name,
         "Last Name": last_name,
@@ -259,18 +300,22 @@ for parcel_id in parcel_ids:
         "Power Lines": power_lines,
         "Water Problems": water_problems,
         "Environmental": environmental,
-        "PAddress": address_1,
+        "PAddress": paddress,
         "PCity": jurisdiction,
-        "PZip": zipcode_1,
+        "PZip": pzip,
         "Latitude": lat,
         "Longitude": long,
         "Urban Growth Area": urban_growth_area,
-        "Address": address_2,
-        "City": city_2,
+        "Address_1": address_1,
+        "Address_2": address_2,
+        "City": city,
         "State": "WA",
-        "Zip": zipcode_2,
+        "Zip": zipcode,
         "Total Billed": total_billed,
-        "Balance": balance}, index=[max(output_file.index)+1])
+        "Balance": balance,
+        "Document Date": document_date,
+        "Sales Price": sales_price,
+        "Parcel ID": parcel_id}, index=[max(output_file.index)+1])
 
     # Appending new row to Master DataFrame
     output_file = output_file.append(new_row)
@@ -282,6 +327,6 @@ for parcel_id in parcel_ids:
 # Closing the browser window
 browser.quit()
 # Dropping Layout Row of Master Dataframe
-output_file.drop(index=0,axis=0, inplace=True)
+output_file.drop(index=0, axis=0, inplace=True)
 # Saving Data to excel spreadsheet
 output_file.to_excel(f"results.xlsx", index=False)

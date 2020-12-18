@@ -23,9 +23,6 @@ Data collected by the script is saved to an excel file named “results.py” wh
 
 ![Output Example](images/output_example.png)
 
-## Disclaimer
-Any web-scraping script depends on the code configuration of the website it is scraping. If decided necessary, website administrators can attempt to prevent web-scraping by making changes to their website’s code configuration. If this happens, it may break the script and the code will need to be updated. If you start receiving errors or notice data is not loading properly, this may be the case.
-
 ## Environment
 This program requires a python 3.7.6 or greater environment. I recommend downloading [Anaconda](https://www.anaconda.com/products/individual]. You can navigate to the Anaconda Installers page to download the package that is right for you.
 
@@ -92,3 +89,7 @@ On a Windows, use:
 ![Example of terminal window as code executes](images/printout.png)
 
 Within a few seconds a new Chrome Browser window will launch and start navigating the web independently. In the *Terminal* or *Bash* window from which the code was executed, you will see a update statement print after data collection is complete for a parcel id. Once the program is finished a new excel file named “results.xlsx” will download to the same directory which holds “executable.py“ and “parcels.xlsx”.
+
+## Disclaimer
+Any web-scraping script depends on the code configuration of the website it is scraping. If decided necessary, website administrators can attempt to prevent web-scraping by making changes to their website’s code configuration. If this happens, it may break the script and the code will need to be updated. If you start receiving errors or notice data is not loading properly, this may be the case.
+

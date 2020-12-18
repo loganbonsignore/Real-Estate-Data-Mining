@@ -19,7 +19,7 @@ Data Collected:
 - Latitude/Longitude
 - & more
 
-Data collected by the script is saved to an excel file named “results.py” which downloads to the same directory that “executable.py” is executed from.
+Data collected by the script is saved to an excel file named “results.py” which downloads to the same directory that “executable.py” is executed from. You can view an example of the data collected by this script by downloading 'output_example_file.xlsx' from this repository.
 
 ![Output Example](images/output_example.png)
 

@@ -28,15 +28,15 @@ This program requires a python 3.7.6 or greater environment. I recommend downloa
 
 ![Anaconda Download Screen](images/anaconda.png)
 
-We will be executing our code in the **Shell**. Use the *Terminal* if you are on a Mac or *Bash* if you are using a Windows. We need to run a few installation commands from the Terminal or Bash window before running the standalone executable.
+We will be executing our code in the **Shell**. Use the *Terminal* if you are on a Mac or *Bash* if you are using a Windows. We need to run a few installation commands from the *Terminal* or *Bash* window before running the standalone executable.
 
-If you are on a Mac, the Terminal is already installed and ready to use. If you are on a Windows, you may need to enable Bash before it is ready for use. [This article](https://www.laptopmag.com/articles/use-bash-shell-windows-10) will help you enable *Bash* if you are exeriencing issues.
+If you are on a Mac, the *Terminal* is already installed and ready to use. If you are on a Windows, you may need to enable *Bash* before it is ready for use. This article will help you [enable *Bash*](https://www.laptopmag.com/articles/use-bash-shell-windows-10) if you are exeriencing issues.
 
-Another environmental requirement of this program is a WebDriver. This program uses *ChromeDriver* which is compatible with the Chrome Browser (Mac, Linux, Windows and ChromeOS). You can download a *ChromeDriver* at [this link](https://chromedriver.chromium.org/downloads). 
+Another environmental requirement of this program is a WebDriver. This program uses *ChromeDriver* which is compatible with the Chrome Browser (Mac, Linux, Windows and ChromeOS). You can download a *ChromeDriver* file [here](https://chromedriver.chromium.org/downloads). 
 
 ![ChromeDriver Download Screen](images/chromedriver.png)
 
-Ensure you choose the correct *ChromeDriver* version based on the Chrome Browser version you are using. [This article](https://help.zenplanner.com/hc/en-us/articles/204253654-How-to-Find-Your-Internet-Browser-Version-Number-Google-Chrome)will help you find your Chrome Browser's version number. 
+Ensure you choose the correct *ChromeDriver* version based on your Chrome Browser's version number. This article will help you find your [Chrome Browser's version number](https://help.zenplanner.com/hc/en-us/articles/204253654-How-to-Find-Your-Internet-Browser-Version-Number-Google-Chrome).
 
 After you’ve download the *ChromeDriver* file, you must move it to it’s proper directory within your operating system. You can do this using a *Terminal* or *Bash* window or from your computer's Finder or File Explorer UI. If you choose to do this using *Terminal* or *Bash*, execute this command from a window located in your downloads directory.
 
@@ -88,7 +88,7 @@ On a Windows, use:
 
 ![Example of terminal window as code executes](images/printout.png)
 
-Within a few seconds a new Chrome Browser window will launch and start navigating the web independently. In the *Terminal* or *Bash* window from which the code was executed, you will see a update statement print after data collection is complete for a parcel id. Once the program is finished a new excel file named “results.xlsx” will download to the same directory which holds “executable.py“ and “parcels.xlsx”.
+Within a few seconds a new Chrome Browser window will launch and start navigating the web independently. In the *Terminal* or *Bash* window from which the code was executed, you will see a update statement print after data collection is complete for each parcel id. Once the program is finished a new excel file named “results.xlsx” will download to the same directory which holds “executable.py“ and “parcels.xlsx”.
 
 ## Disclaimer
 Any web-scraping script depends on the code configuration of the website it is scraping. If decided necessary, website administrators can attempt to prevent web-scraping by making changes to their website’s code configuration. If this happens, it may break the script and the code will need to be updated. If you start receiving errors or notice data is not loading properly, this may be the case.

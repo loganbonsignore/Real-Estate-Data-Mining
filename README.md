@@ -53,9 +53,9 @@ You should see *ChromeDriver* now sitting in this directory.
 ## Installing Library Dependencies
 Next, we need to install our program’s dependencies to our local environment. You can execute these commands from any *Terminal* or *Bash* window:
 
-1.	pip install pandas
-2.	pip install beautifulsoup4
-3.	pip install splinter
+1.	`pip install pandas`
+2.	`pip install beautifulsoup4`
+3.	`pip install splinter`
 
 If the packages are installed correctly you will receive a ‘successful installation’ print out after each installation.
 
